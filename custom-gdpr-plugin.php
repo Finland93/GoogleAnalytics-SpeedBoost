@@ -1,10 +1,19 @@
 <?php
 /*
 Plugin Name: PopUp for Google Analytics
+Plugin URI: https://github.com/Finland93/GoogleAnalytics-SpeedBoost
 Description: This plugin creates popup where your users can set "accept" for loading Google Analytics or "Reject" which doesnt load Google Analytics.
 Version: 1.0
 Author: Finland93
-*/
+Author URI: https://github.com/Finland93
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ */
+
+// Exit if directly accessed
+if (!defined('ABSPATH')) {
+    exit; 
+}
 
 // Enqueue styles and scripts
 add_action('wp_enqueue_scripts', 'custom_gdpr_popup_enqueue_styles_and_scripts');
