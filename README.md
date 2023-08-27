@@ -31,12 +31,16 @@ Go to your theme template files and lookup for header.php. Inside this file you 
 #accept-btn, #reject-btn {
   margin: 0 10px; 
 }
-</style>```
+</style>
+```
 Next step is to add this line below opening <body> tag:
-```<div id="gdpr-popup"><div><p>Our website uses cookies</p><button id="accept-btn">Accept</button><button id="reject-btn">Reject</button></div></div>```
+```
+<div id="gdpr-popup"><div><p>Our website uses cookies</p><button id="accept-btn">Accept</button><button id="reject-btn">Reject</button></div></div>
+```
 
 Then you need to go inside footer.php file where we are looking ending </body> tag and adding this script above it, REMEBER change your G-tag code on these two lines below: YOUR G-CODE HERE
-```<script>
+```
+<script>
   document.addEventListener('DOMContentLoaded', function () {
   const gdprPopup = document.getElementById('gdpr-popup');
   const acceptBtn = document.getElementById('accept-btn');
@@ -85,4 +89,5 @@ Then you need to go inside footer.php file where we are looking ending </body> t
     loadAnalyticsScript(); 
   }
 });
-</script>```
+</script>
+```
