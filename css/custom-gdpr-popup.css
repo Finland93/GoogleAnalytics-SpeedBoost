@@ -1,0 +1,26 @@
+#gdpr-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  z-index: 9999;
+}
+
+#gdpr-popup > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  align-items: center; 
+}
+
+#accept-btn, #reject-btn {
+  margin: 0 10px; 
+}
