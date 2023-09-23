@@ -57,9 +57,9 @@ function custom_gdpr_popup_settings_page() {
         echo '<div class="notice notice-success"><p>Settings saved successfully.</p></div>';
     }
 
-    $gdpr_popup_text = get_option('gdpr_popup_text', 'Sivustomme käyttää evästeitä');
-    $gdpr_accept_text = get_option('gdpr_accept_text', 'Hyväksy');
-    $gdpr_reject_text = get_option('gdpr_reject_text', 'Hylkää');
+    $gdpr_popup_text = get_option('gdpr_popup_text', 'Our website uses cookies');
+    $gdpr_accept_text = get_option('gdpr_accept_text', 'Accept');
+    $gdpr_reject_text = get_option('gdpr_reject_text', 'Reject');
     $google_analytics_code = get_option('google_analytics_code', '');
 
     ?>
