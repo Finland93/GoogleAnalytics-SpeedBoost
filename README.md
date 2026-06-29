@@ -1,93 +1,30 @@
 # GoogleAnalytics-SpeedBoost
-This plugin removes Google Analytics load and creates popup where user can choose collection or not, this will improve loading times on Lighthouse, PageSpeed Insights and also on GTMetrix because analytics.js script file is not loaded.
 
-# Another way to use this
-Go to your theme template files and lookup for header.php. Inside this file you need to add this above </head> tag:
-```
-<style>
-#gdpr-popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 20px;
-  z-index: 9999;
-}
+Improve your Lighthouse / PageSpeed / GTmetrix scores by **not loading Google Analytics until the visitor consents**. The plugin shows a small consent popup and only injects the GA tag after the visitor clicks **Accept** — and lets them withdraw consent later.
 
-#gdpr-popup > div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  display: flex;
-  align-items: center; 
-}
+## Features
 
-#accept-btn, #reject-btn {
-  margin: 0 10px; 
-}
-</style>
-```
-Next step is to add this line below opening <body> tag:
-```
-<div id="gdpr-popup"><div><p>Our website uses cookies</p><button id="accept-btn">Accept</button><button id="reject-btn">Reject</button></div></div>
-```
+- GA loads **only after consent** (better performance and privacy).
+- Configurable popup text and Accept/Reject button labels.
+- **No jQuery** — a few KB of vanilla JS.
+- Withdraw consent anywhere with the `[ga_consent_reset]` shortcode.
+- The popup only appears once a GA Measurement ID is configured.
 
-Then you need to go inside footer.php file where we are looking ending </body> tag and adding this script above it, REMEBER change your G-tag code on these two lines below: YOUR G-CODE HERE
-```
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-  const gdprPopup = document.getElementById('gdpr-popup');
-  const acceptBtn = document.getElementById('accept-btn');
-  const rejectBtn = document.getElementById('reject-btn');
+## Setup
 
-  function setCookie(name, value, days) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
-  }
+1. Activate the plugin.
+2. Go to **GDPR Popup** in the admin menu and enter your GA Measurement ID (e.g. `G-XXXXXXXXXX`).
+3. Optionally customise the popup text and buttons.
 
-  function setCookieConsent() {
-    setCookie('AllowAnalytics', 'true', 365); // Set the cookie to expire in a year
-    gdprPopup.style.display = 'none';
-    loadAnalyticsScript();
-  }
+## What changed in 2.0.0
 
-  function rejectCookieConsent() {
-    setCookie('AllowAnalytics', 'false', 365);
-    gdprPopup.style.display = 'none';
-  }
+- **Removed the jQuery dependency.** 1.0 enqueued jQuery even though the script was pure vanilla JS — counter-productive for a speed plugin.
+- **Hardened consent handling.** Cookies are parsed exactly (no substring false matches) and written with `SameSite=Lax`. The GA ID is validated on save.
+- **Added consent withdrawal** via `[ga_consent_reset]` (a GDPR requirement that 1.0 lacked).
+- The popup and scripts now load **only when a GA ID is set**, plus basic dialog accessibility and nicer default styling.
 
-  acceptBtn.addEventListener('click', setCookieConsent);
-  rejectBtn.addEventListener('click', rejectCookieConsent);
+## License
 
-  function loadAnalyticsScript() {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=YOUR G-CODE HERE';
-    document.head.appendChild(script);
+GPLv2 or later — see [LICENSE](LICENSE).
 
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'YOUR G-CODE HERE');
-  }
-
-  const hasConsent = document.cookie.includes('AllowAnalytics=true');
-  const hasRejected = document.cookie.includes('AllowAnalytics=false');
-
-  if (!hasConsent && !hasRejected) {
-    gdprPopup.style.display = 'block';
-  } else if (hasConsent) {
-    loadAnalyticsScript(); 
-  }
-});
-</script>
-```
+**Author:** [Finland93](https://github.com/Finland93)
