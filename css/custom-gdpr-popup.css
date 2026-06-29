@@ -1,26 +1,53 @@
 #gdpr-popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 20px;
-  z-index: 9999;
+	display: none;
+	position: fixed;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 9999;
 }
 
 #gdpr-popup > div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  display: flex;
-  align-items: center; 
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 24px;
+	max-width: 92vw;
+	width: 420px;
+	border-radius: 12px;
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+	text-align: center;
 }
 
-#accept-btn, #reject-btn {
-  margin: 0 10px; 
+#gdpr-popup p {
+	margin: 0 0 16px;
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+#gdpr-popup button {
+	margin: 0 6px;
+	padding: 10px 22px;
+	border: 0;
+	border-radius: 6px;
+	font-size: 15px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+#accept-btn {
+	background: #2271b1;
+	color: #fff;
+}
+#accept-btn:hover {
+	background: #135e96;
+}
+
+#reject-btn {
+	background: #f0f0f1;
+	color: #1d2327;
+}
+#reject-btn:hover {
+	background: #e0e0e1;
 }
